@@ -1,0 +1,20 @@
+.hobbies-container {
+    display: flex;
+
+    flex-flow: column nowrap;
+}
+
+form {
+    display: flex;
+
+    flex-flow: column nowrap;
+    align-items: center;
+
+    & *:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+option {
+    text-transform: capitalize;
+}

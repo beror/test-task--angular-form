@@ -1,0 +1,51 @@
+<form [formGroup]='form' (submit)='submit()'>
+    <label for='firstName'>First name</label>
+    <input id='firstName' type='text' formControlName='firstName'>
+    <div *ngIf='form.get("firstName")?.dirty && form.get("firstName")?.invalid'>First name is required</div>
+
+    <label for='lastName'>Last name </label>
+    <input id='lastName' type='text' formControlName='lastName'>
+    <div *ngIf='form.get("lastName")?.dirty && form.get("lastName")?.invalid'>Last name is required</div>
+
+
+    <label for='birthDate'>Birth date</label>
+    <div>
+        <input id='birthDate' matInput [matDatepicker]='birthDatePicker' formControlName='birthDate'>
+        <mat-datepicker-toggle matSuffix [for]='birthDatePicker'></mat-datepicker-toggle>
+        <mat-datepicker #birthDatePicker></mat-datepicker>
+    </div>
+    <div *ngIf='form.get("birthDate")?.dirty && form.get("birthDate")?.invalid'>Birth date is required</div>
+    
+
+    <label for='technology'>Technology</label>
+    <select id='technology' formControlName='technology' (change)='onTechnologySelected()'>
+        <option value=''>Select technology...</option>
+        <option *ngFor='let technology of availableTechnologies'>{{ technology }}</option>
+    </select>
+    <div *ngIf='form.get("technology")?.dirty && form.get("technology")?.invalid'>Technology is required</div>
+    
+    <label for='technologyVersion'>Technology version</label>
+    <select id='technologyVersion' formControlName='technologyVersion'>
+        <option value=''>Select technology version...</option>
+        <option *ngFor='let version of availableTechnologyVersions[form.get("technology")?.value]'>{{ version }}</option>
+    </select>
+    <div *ngIf='form.get("technologyVersion")?.dirty && form.get("technologyVersion")?.invalid'>Technology version is required</div>
+
+
+    <label for='email'>Email</label>
+    <input id='email' type='email' formControlName='email'>
+    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["required"]'>Email is required</div>
+    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["email"]'>Invalid email</div>
+    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["isEmailTaken"]'>The email is taken</div>
+
+
+    <button (click)='onAddHobbieClick()' type='button'>+ Add a hobbie</button>
+    
+    <div *ngFor='let hobbieControl of hobbiesControls; let i = index' class='hobbies-container'>
+        <label for='hobbie{{ i }}'>Hobbie {{ i + 1 }}</label>
+        <input id='hobbie{{ i }}' type='text' [formControl]='hobbieControl'>
+    </div>
+
+    
+    <button type='submit'>Submit</button>
+</form>
