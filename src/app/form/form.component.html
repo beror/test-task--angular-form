@@ -1,11 +1,11 @@
 <form [formGroup]='form' (submit)='submit()'>
     <label for='firstName'>First name</label>
     <input id='firstName' type='text' formControlName='firstName'>
-    <div *ngIf='form.get("firstName")?.dirty && form.get("firstName")?.invalid'>First name is required</div>
+    <div *ngIf='form.get("firstName")?.dirty && form.get("firstName")?.invalid' class='alert'>First name is required</div>
 
-    <label for='lastName'>Last name </label>
+    <label for='lastName'>Last name</label>
     <input id='lastName' type='text' formControlName='lastName'>
-    <div *ngIf='form.get("lastName")?.dirty && form.get("lastName")?.invalid'>Last name is required</div>
+    <div *ngIf='form.get("lastName")?.dirty && form.get("lastName")?.invalid' class='alert'>Last name is required</div>
 
 
     <label for='birthDate'>Birth date</label>
@@ -14,29 +14,29 @@
         <mat-datepicker-toggle matSuffix [for]='birthDatePicker'></mat-datepicker-toggle>
         <mat-datepicker #birthDatePicker></mat-datepicker>
     </div>
-    <div *ngIf='form.get("birthDate")?.dirty && form.get("birthDate")?.invalid'>Birth date is required</div>
+    <div *ngIf='form.get("birthDate")?.dirty && form.get("birthDate")?.invalid' class='alert'>Birth date is required</div>
     
 
-    <label for='technology'>Technology</label>
-    <select id='technology' formControlName='technology' (change)='onTechnologySelected()'>
-        <option value=''>Select technology...</option>
-        <option *ngFor='let technology of availableTechnologies'>{{ technology }}</option>
+    <label for='framework'>Framework</label>
+    <select id='framework' formControlName='framework' (change)='onFrameworkSelected()'>
+        <option value=''>Select framework...</option>
+        <option *ngFor='let framework of availableFrameworks'>{{ framework }}</option>
     </select>
-    <div *ngIf='form.get("technology")?.dirty && form.get("technology")?.invalid'>Technology is required</div>
+    <div *ngIf='form.get("framework")?.dirty && form.get("framework")?.invalid' class='alert'>Framework is required</div>
     
-    <label for='technologyVersion'>Technology version</label>
-    <select id='technologyVersion' formControlName='technologyVersion'>
-        <option value=''>Select technology version...</option>
-        <option *ngFor='let version of availableTechnologyVersions[form.get("technology")?.value]'>{{ version }}</option>
+    <label for='frameworkVersion'>Framework version</label>
+    <select id='frameworkVersion' formControlName='frameworkVersion'>
+        <option value=''>Select framework version...</option>
+        <option *ngFor='let version of availableFrameworkVersions[form.get("framework")?.value]'>{{ version }}</option>
     </select>
-    <div *ngIf='form.get("technologyVersion")?.dirty && form.get("technologyVersion")?.invalid'>Technology version is required</div>
+    <div *ngIf='form.get("frameworkVersion")?.dirty && form.get("frameworkVersion")?.invalid' class='alert'>Framework version is required</div>
 
 
     <label for='email'>Email</label>
     <input id='email' type='email' formControlName='email'>
-    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["required"]'>Email is required</div>
-    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["email"]'>Invalid email</div>
-    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["isEmailTaken"]'>The email is taken</div>
+    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["required"]' class='alert'>Email is required</div>
+    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["email"]' class='alert'>Invalid email</div>
+    <div *ngIf='form.get("email")?.dirty && form.get("email")?.errors?.["isEmailTaken"]' class='alert'>The email is taken</div>
 
 
     <button (click)='onAddHobbieClick()' type='button'>+ Add a hobbie</button>
@@ -47,5 +47,5 @@
     </div>
 
     
-    <button type='submit'>Submit</button>
+    <button type='submit' [disabled]='!form.valid'>Submit</button>
 </form>

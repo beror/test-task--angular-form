@@ -1,20 +1,32 @@
-.hobbies-container {
-    display: flex;
-
-    flex-flow: column nowrap;
-}
-
 form {
     display: flex;
 
+    width: 300px;
+
     flex-flow: column nowrap;
-    align-items: center;
+    align-items: flex-start;
 
     & *:not(:last-child) {
         margin-bottom: 20px;
     }
 }
 
+label {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
 option {
     text-transform: capitalize;
+}
+
+.hobbies-container {
+    display: flex;
+
+    flex-flow: column nowrap;
+}
+
+.alert {
+    color: red;
+    font-weight: bolder;
 }
